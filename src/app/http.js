@@ -17,6 +17,7 @@ export async function get(uri, timeout = 10000) {
 
   let response = await withTimeout(timeout,
     fetch(uri, {
+      credentials: "same-origin",
       method: 'GET',
       referrerPolicy: "no-referrer",
       headers: {
@@ -24,7 +25,7 @@ export async function get(uri, timeout = 10000) {
       }
     })
   );
-  
+
   let jsonResponse = null;
   if (response.ok) {
     jsonResponse = await response.json();
@@ -56,7 +57,7 @@ export async function post(uri, object, timeout = 10000) {
         body: JSON.stringify(object)
       })
   );
-  
+
   let jsonResponse = null;
   if (response.ok) {
     jsonResponse = await response.json();
